@@ -5,6 +5,7 @@
     </script>
     <style>
         @font-face { font-family: 'DOSMyungjo'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSMyungjo.woff') format('woff'); font-weight: normal; font-style: normal; }
+        @font-face { font-family: 'Godo'; font-style: normal; font-weight: 400; src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff'); } @font-face { font-family: 'Godo'; font-style: normal; font-weight: 700; src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff') format('woff'); } .godo * { font-family: 'Godo', sans-serif; }
         .box {
             background-color:white;
             width : 50vw;
@@ -13,16 +14,33 @@
             left : 50%;
             margin:auto;
             margin-top:30vh;
+            text-align:center;
+            padding : 3%;
         }
         .title {
             font-family : DOSMyungjo;
+            font-size : 1.5vw;
+        }
+        .detail {
+            font-family : Godo;
+            margin-top:8%;
+            font-size : 1.2vw;
         }
     </style>
 </head>
 <body style="background-color:{% if result_check == 'red'%}#c43d31; {%elif result_check == 'green'%}#18964f; {%else%}#f7a900;{%endif%}">
     <div class="box">
-        <p class="title">{{url}} is {{result_check}}</p> 
-        <p>{{flag_white}} and {{flag_black}}</p>
+        <div style="border:solid;border-color:{% if result_check == 'red'%}#c43d31; {%elif result_check == 'green'%}#18964f; {%else%}#f7a900;{%endif%}">
+        <p class="title">{{url}}</p>
+        </div>
+        
+        {% if result_check == 'red' %}
+            <p class="detail">is definitely dangerous as a phishing site.</p>
+        {% elif result_check == 'orange' %}
+            <p class="detail">cannot guarantee safety.</p>
+        {% elif result_check == 'green' %}
+            <p class="detail">perfectly safe.</p>
+        {% endif %}
     </div>
     
 </body>
