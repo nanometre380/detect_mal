@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+    </script>
+    <style>
+        @font-face { font-family: 'DOSMyungjo'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSMyungjo.woff') format('woff'); font-weight: normal; font-style: normal; }
+        .box {
+            background-color:white;
+            width : 50vw;
+            height : 30vh;
+            top : 50%;
+            left : 50%;
+            margin:auto;
+            margin-top:30vh;
+        }
+        .title {
+            font-family : DOSMyungjo;
+        }
+    </style>
+</head>
+<body style="background-color:{% if result_check == 'red'%}#c43d31; {%elif result_check == 'green'%}#18964f; {%else%}#f7a900;{%endif%}">
+    <div class="box">
+        <p class="title">{{url}} is {{result_check}}</p> 
+        <p>{{flag_white}} and {{flag_black}}</p>
+    </div>
+    
+</body>
+</html>

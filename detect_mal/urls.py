@@ -27,4 +27,5 @@ urlpatterns = [
     path('insert_black/', views.black_list, name='blacklist'),
     path('api/', include('detector.urls')),
     path('insert_white/', views.white_list, name='whitelist'),
+    path('check/<path:url>/', views.check_url, name='check_url'),
 ]

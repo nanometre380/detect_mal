@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Black, White
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
@@ -55,7 +55,7 @@ def black_list(request):
             if(black_last.black_id < phish_id):    
                 black = Black()
                 black.black_id = phish_id
-                black.url = url
+                black.url = str(url)
                 black.save()
 
 def white_list(request):
@@ -73,6 +73,30 @@ def white_list(request):
 
 def insert_white(whiteUrl):
     white = White()
-    whiteUrl = "www."+whiteUrl
-    white.url= json.dumps(whiteUrl)
+    whiteUrl = "https://www."+whiteUrl
+    white.url= whiteUrl
     white.save()
+
+def check_url(request, url):
+    flag_black=0
+    try:
+        value = get_object_or_404(White, url=url)
+        flag_white = 1
+    except:
+        flag_white = 0
+        try:
+            value2 = get_object_or_404(Black, url=url)
+            flag_black = 1
+        except:
+            flag_black = 0
+
+    #value2 = get_object(Black,)
+    
+    if(flag_white == 1):
+        result_check = 'green'
+    elif(flag_white == 0 and flag_black == 1):
+        result_check = 'red'
+    else :
+        result_check = 'orange'
+    
+    return render(request, 'result.html', {'result_check' : result_check, 'url' : url, 'flag_white' : flag_white, 'flag_black' : flag_black})
